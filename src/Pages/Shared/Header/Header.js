@@ -42,10 +42,15 @@ const Header = ({ user }) => {
                     </Nav>
                     <Nav>
                         <>
-                            <Button className='text-light fw-bold' variant="outline-primary" onClick={toggleTheme}>{theme}</Button>
+                            <Button className='text-light fw-bold me-2' variant="outline-primary" onClick={toggleTheme}>{theme}</Button>
                         </>
                         <>
-                            Login/userProfile
+                            {
+                                user?.uid ? <Link>{user?.displayName}</Link>
+                                    : <Link to={'/login'}>
+                                        <Button className='text-light fw-bold' variant="outline-warning">Login</Button>
+                                    </Link>
+                            }
                         </>
                     </Nav>
                 </Navbar.Collapse>
