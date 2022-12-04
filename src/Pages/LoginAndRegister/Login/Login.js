@@ -1,12 +1,34 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import { BiLogInCircle } from "react-icons/bi";
 import { FaGithub, FaGoogle } from "react-icons/fa";
+import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
+import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 
 const Login = () => {
+    const { googleSignIn, githubSignIn } = useContext(AuthContext)
+    const providerGoogle = new GoogleAuthProvider()
+    const providerGithub = new GithubAuthProvider()
 
+    const handleGoogleLogin = () => {
+        googleSignIn(providerGoogle)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+            })
+            .catch(error => console.error(error))
+    }
+
+    const handleGithubLogin = () => {
+        githubSignIn(providerGithub)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+            })
+            .catch(error => console.error(error))
+    }
 
     const handleSubmitLogin = (event) => {
         event.preventDefault()
@@ -37,8 +59,8 @@ const Login = () => {
             </Form>
 
             <ButtonGroup className='mt-3'>
-                <Button variant="info" className='me-3 rounded'><FaGoogle />  Login With Google</Button>
-                <Button variant="info" className='me-3 rounded'><FaGithub /> Login With Github</Button>
+                <Button onClick={handleGoogleLogin} variant="info" className='me-3 rounded'><FaGoogle />  Login With Google</Button>
+                <Button onClick={handleGithubLogin} variant="info" className='me-3 rounded'><FaGithub /> Login With Github</Button>
             </ButtonGroup>
         </div>
     );
