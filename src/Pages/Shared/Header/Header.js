@@ -3,12 +3,13 @@ import { Button } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import { BiLogOut } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
 import Logo from '../../../assets/web logo/logo.png';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 
 const Header = () => {
-    const {user} = useContext(AuthContext)
+    const { user, logOut } = useContext(AuthContext)
     const [theme, setTheme] = useState('Light');
 
     const toggleTheme = () => {
@@ -18,6 +19,12 @@ const Header = () => {
         else {
             setTheme('Light')
         }
+    }
+
+    const handleLogOut = () => {
+        logOut()
+            .then(() => { })
+            .catch(error => console.error(error))
     }
 
     return (
@@ -48,7 +55,10 @@ const Header = () => {
                         </>
                         <>
                             {
-                                user?.uid ? <Link className="nav-link">{user?.displayName}</Link>
+                                user?.uid ? <>
+                                    <img src={user?.photoURL} title={user?.displayName} width="45" height="45" alt="" className="d-inline-block align-top me-2 rounded-5" />
+                                    <Button onClick={handleLogOut} className='btn btn-primary'>Log Out <BiLogOut /></Button>
+                                </>
                                     : <Link to={'/login'}>
                                         <Button className='text-light fw-bold' variant="outline-warning">Login</Button>
                                     </Link>

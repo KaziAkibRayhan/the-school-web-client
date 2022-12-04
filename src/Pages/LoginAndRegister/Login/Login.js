@@ -6,9 +6,10 @@ import { BiLogInCircle } from "react-icons/bi";
 import { FaGithub, FaGoogle } from "react-icons/fa";
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
-    const { googleSignIn, githubSignIn } = useContext(AuthContext)
+    const { googleSignIn, githubSignIn, signIn } = useContext(AuthContext)
     const providerGoogle = new GoogleAuthProvider()
     const providerGithub = new GithubAuthProvider()
 
@@ -36,6 +37,14 @@ const Login = () => {
         const email = form.email.value
         const password = form.password.value
         console.log(email, password);
+
+        signIn(email, password)
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                form.reset();
+            })
+            .catch(error => console.error(error))
     }
     return (
         <div className='w-50 mx-auto shadow-lg p-5 rounded mt-5'>
@@ -62,6 +71,7 @@ const Login = () => {
                 <Button onClick={handleGoogleLogin} variant="info" className='me-3 rounded'><FaGoogle />  Login With Google</Button>
                 <Button onClick={handleGithubLogin} variant="info" className='me-3 rounded'><FaGithub /> Login With Github</Button>
             </ButtonGroup>
+            <p className='mt-3'>Don't have an account? <Link className='btn btn-primary' to={'/register'}>Register <BiLogInCircle /></Link></p>
         </div>
     );
 };
