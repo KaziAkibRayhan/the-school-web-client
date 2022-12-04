@@ -46,7 +46,7 @@ const Header = ({ user }) => {
                         </>
                         <>
                             {
-                                user?.uid ? <Link>{user?.displayName}</Link>
+                                user?.uid ? <Link className="nav-link">{user?.displayName}</Link>
                                     : <Link to={'/login'}>
                                         <Button className='text-light fw-bold' variant="outline-warning">Login</Button>
                                     </Link>
