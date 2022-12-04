@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 import { AiOutlineArrowDown } from "react-icons/ai";
+import CoursesCardSummery from './CoursesCardSummery/CoursesCardSummery';
 
 const Courses = () => {
     const [categoryCourses, setCategoryCourses] = useState([])
+    const allCourses = useLoaderData()
 
     useEffect(() => {
         fetch('http://localhost:5000/courses-category')
@@ -12,9 +14,8 @@ const Courses = () => {
             .then(data => setCategoryCourses(data))
     }, [])
     return (
-        <Container>
+        <Container className="mt-5">
             <Row>
-                <Col lg='9'>Content Detalis Side</Col>
                 <Col lg='3'>
                     <h5 className='text-primary'>Our Courses Category <AiOutlineArrowDown /></h5>
                     <div>
@@ -24,6 +25,13 @@ const Courses = () => {
                                     {category.name}</Link></p>)
                         }
                     </div>
+                </Col>
+                <Col lg='9'>
+                    <Row>
+                        {
+                            allCourses.map(course => <CoursesCardSummery key={course.id} course={course}></CoursesCardSummery>)
+                        }
+                    </Row>
                 </Col>
             </Row>
         </Container>
