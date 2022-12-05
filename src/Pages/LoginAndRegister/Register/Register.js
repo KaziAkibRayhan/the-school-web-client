@@ -1,13 +1,14 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { BiLogInCircle } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 
 const Register = () => {
-
     const { createUser, updateUserProfile } = useContext(AuthContext)
+    const [error, setError] = useState('')
 
     const handleSubmitRegister = (event) => {
         event.preventDefault()
@@ -16,7 +17,6 @@ const Register = () => {
         const photoURL = form.photoURL.value;
         const email = form.email.value;
         const password = form.password.value;
-        console.log(fullName, photoURL, email, password);
 
         createUser(email, password)
             .then(result => {
@@ -24,8 +24,13 @@ const Register = () => {
                 console.log(user);
                 profileUpdate(fullName, photoURL)
                 form.reset();
+                setError('')
+                toast("Successfully Registration !")
             })
-            .catch(error => console.error(error))
+            .catch(error => {
+                setError(error.message)
+                toast("some err! please try again...")
+            })
     }
 
     const profileUpdate = (fullName, photoURL) => {
@@ -35,7 +40,9 @@ const Register = () => {
         }
         updateUserProfile(profile)
             .then(() => { })
-            .catch(error => console.error(error))
+            .catch(error => {
+                setError(error.message)
+            })
     }
 
     return (
@@ -61,6 +68,9 @@ const Register = () => {
                     <Form.Label>Password</Form.Label>
                     <Form.Control type="password" name='password' placeholder="Password" required />
                 </Form.Group>
+                <p className='text-danger fw-bold'>
+                    {error}
+                </p>
                 <Button variant="success" type="submit">
                     Register <BiLogInCircle />
                 </Button>

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
@@ -8,9 +8,11 @@ import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
+import { toast } from 'react-toastify';
 
 const Login = () => {
     const { googleSignIn, githubSignIn, signIn } = useContext(AuthContext)
+    const [error, setError] = useState('')
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -25,8 +27,12 @@ const Login = () => {
                 const user = result.user;
                 console.log(user);
                 navigate(from, { replace: true })
+                setError('')
+                toast("Successfully Login !")
             })
-            .catch(error => console.error(error))
+            .catch(error => {
+                setError(error.message)
+            })
     }
 
     const handleGithubLogin = () => {
@@ -35,8 +41,12 @@ const Login = () => {
                 const user = result.user;
                 console.log(user);
                 navigate(from, { replace: true })
+                setError('')
+                toast("Successfully Login !")
             })
-            .catch(error => console.error(error))
+            .catch(error => {
+                setError(error.message)
+            })
     }
 
     const handleSubmitLogin = (event) => {
@@ -44,7 +54,6 @@ const Login = () => {
         const form = event.target
         const email = form.email.value
         const password = form.password.value
-        console.log(email, password);
 
         signIn(email, password)
             .then(result => {
@@ -52,8 +61,14 @@ const Login = () => {
                 console.log(user);
                 form.reset();
                 navigate(from, { replace: true })
+                setError('')
+                toast("Successfully Login !")
             })
-            .catch(error => console.error(error))
+            .catch(error => {
+                console.log(error);
+                setError(error.message)
+                toast("email or password error! Make sure email and password.")
+            })
     }
     return (
         <Container className='w-70 mx-auto shadow-lg p-5 rounded mt-4'>
@@ -71,11 +86,13 @@ const Login = () => {
                     <Form.Label>Password</Form.Label>
                     <Form.Control type="password" name='password' placeholder="Password" required />
                 </Form.Group>
+                <p className='text-danger fw-bold'>
+                    {error}
+                </p>
                 <Button variant="success" type="submit">
                     Login <BiLogInCircle />
                 </Button>
             </Form>
-
             <ButtonGroup className='mt-3'>
                 <Button onClick={handleGoogleLogin} variant="info" className='me-3 rounded'><FaGoogle />  Login With Google</Button>
                 <Button onClick={handleGithubLogin} variant="info" className='me-3 rounded'><FaGithub /> Login With Github</Button>

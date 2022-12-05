@@ -56,7 +56,7 @@ const Header = () => {
                         <>
                             {
                                 user?.uid ? <>
-                                    <Button onClick={handleLogOut} className='btn btn-warning my-2'>Log Out <BiLogOut /></Button>
+                                    <Button onClick={handleLogOut} className='btn btn-warning my-2 text-light fw-bold'>Log Out <BiLogOut /></Button>
                                     <img src={user?.photoURL} title={user?.displayName} width="45" height="45" alt="" className="d-inline-block align-top ms-2 rounded-5" />
                                 </>
                                     : <Link to={'/login'}>

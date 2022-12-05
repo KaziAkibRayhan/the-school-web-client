@@ -20,7 +20,7 @@ const Courses = () => {
                     <h5 className='text-primary'>Our Courses Category <AiOutlineArrowDown /></h5>
                     <div className='shadow p-3 rounded'>
                         {
-                            categoryCourses.map(category => <ListGroup>
+                            categoryCourses.map(category => <ListGroup key={category.id}>
                                 <ListGroup.Item action variant="light" className='mb-3'>
                                     <Link className='nav-link text-dark' to={`/courses-category/${category.id}`}>
                                         {category.name}</Link>
