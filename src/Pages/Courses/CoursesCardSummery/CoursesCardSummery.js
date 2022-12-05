@@ -6,10 +6,9 @@ import { Link } from 'react-router-dom';
 
 const CoursesCardSummery = ({ course }) => {
     const { id, course_name, img, course_fee, details } = course;
-    console.log(course);
     return (
         <Col lg='6' className='mb-5 mx-auto'>
-            <Card style={{ width: '23rem' }}>
+            <Card data-aos="zoom-in-up" style={{ width: '23rem' }}>
                 <Card.Img variant="top" src={img} />
                 <Card.Body>
                     <Card.Title>{course_name}</Card.Title>

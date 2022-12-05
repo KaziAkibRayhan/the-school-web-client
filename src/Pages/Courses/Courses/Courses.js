@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
 import { Link, useLoaderData } from 'react-router-dom';
 import { AiOutlineArrowDown } from "react-icons/ai";
-import CoursesCardSummery from './CoursesCardSummery/CoursesCardSummery';
+import CoursesCardSummery from '../CoursesCardSummery/CoursesCardSummery';
 
 const Courses = () => {
     const [categoryCourses, setCategoryCourses] = useState([])

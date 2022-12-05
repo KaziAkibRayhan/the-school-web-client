@@ -1,16 +1,16 @@
 import React from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { Image } from 'react-bootstrap';
-import { FaCloudDownloadAlt, FaFileDownload, FaStar } from 'react-icons/fa';
+import { FaFileDownload, FaStar } from 'react-icons/fa';
 import Pdf from "react-to-pdf";
 
 
 const CourseDetails = () => {
     const ref = React.createRef();
     const course = useLoaderData()
-    const { rating, img, details, course_name, course_fee, course_duration, } = course;
+    const {id, rating, img, details, course_name, course_fee, course_duration, } = course;
     return (
         <div>
             <div className='d-flex justify-content-center mt-2'>
@@ -28,7 +28,9 @@ const CourseDetails = () => {
                         <h5 className='text-dark'>Course Description:</h5>
                         {details}.
                     </Card.Text>
-                    <Button variant="primary">Go somewhere</Button>
+                    <Link to={`/courses/purchase/${id}`}>
+                        <Button variant="primary">Purchase The Course</Button>
+                    </Link>
                 </Card.Body>
                 <Card.Footer className="d-flex justify-content-between align-items-center">
                     <div className='d-flex align-items-center'>

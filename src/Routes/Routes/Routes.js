@@ -2,11 +2,13 @@ import { createBrowserRouter } from "react-router-dom";
 import Main from "../../layout/Main";
 import Blog from "../../Pages/Blog/Blog";
 import CourseDetails from "../../Pages/Courses/CourseDetails/CourseDetails";
-import Courses from "../../Pages/Courses/Courses";
+import CoursePurchase from "../../Pages/Courses/CoursePurchase/CoursePurchase";
+import Courses from "../../Pages/Courses/Courses/Courses";
 import CoursesCategory from "../../Pages/CoursesCategory/CoursesCategory";
 import FAQ from "../../Pages/FAQ/FAQ";
 import Login from "../../Pages/LoginAndRegister/Login/Login";
 import Register from "../../Pages/LoginAndRegister/Register/Register";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 
 const routes = createBrowserRouter([{
@@ -25,6 +27,10 @@ const routes = createBrowserRouter([{
             path: '/courses-category/:id',
             element: <CoursesCategory></CoursesCategory>,
             loader: ({ params }) => fetch(`http://localhost:5000/courses-category/${params.id}`)
+        },
+        {
+            path: '/courses/purchase',
+            element: <PrivateRoute><CoursePurchase /></PrivateRoute>
         },
         { path: '/faq', element: <FAQ /> },
         { path: '/blog', element: <Blog /> },

@@ -6,10 +6,15 @@ import { BiLogInCircle } from "react-icons/bi";
 import { FaGithub, FaGoogle } from "react-icons/fa";
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const Login = () => {
     const { googleSignIn, githubSignIn, signIn } = useContext(AuthContext)
+    const navigate = useNavigate();
+    const location = useLocation();
+
+    let from = location.state?.from?.pathname || "/";
+
     const providerGoogle = new GoogleAuthProvider()
     const providerGithub = new GithubAuthProvider()
 
@@ -18,6 +23,7 @@ const Login = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user);
+                navigate(from, { replace: true })
             })
             .catch(error => console.error(error))
     }
@@ -27,6 +33,7 @@ const Login = () => {
             .then(result => {
                 const user = result.user;
                 console.log(user);
+                navigate(from, { replace: true })
             })
             .catch(error => console.error(error))
     }
@@ -43,6 +50,7 @@ const Login = () => {
                 const user = result.user;
                 console.log(user);
                 form.reset();
+                navigate(from, { replace: true })
             })
             .catch(error => console.error(error))
     }
