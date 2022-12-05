@@ -10,7 +10,6 @@ import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 
 const Header = () => {
     const { user, logOut } = useContext(AuthContext)
-    console.log(user);
     const [theme, setTheme] = useState('Light');
 
     const toggleTheme = () => {
@@ -57,8 +56,8 @@ const Header = () => {
                         <>
                             {
                                 user?.uid ? <>
-                                    <img src={user?.photoURL} title={user?.displayName} width="45" height="45" alt="" className="d-inline-block align-top me-2 rounded-5" />
-                                    <Button onClick={handleLogOut} className='btn btn-primary'>Log Out <BiLogOut /></Button>
+                                    <Button onClick={handleLogOut} className='btn btn-warning my-2'>Log Out <BiLogOut /></Button>
+                                    <img src={user?.photoURL} title={user?.displayName} width="45" height="45" alt="" className="d-inline-block align-top ms-2 rounded-5" />
                                 </>
                                     : <Link to={'/login'}>
                                         <Button className='text-light fw-bold' variant="outline-warning">Login</Button>

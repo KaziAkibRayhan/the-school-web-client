@@ -5,7 +5,6 @@ import CoursesCardSummery from '../Courses/CoursesCardSummery/CoursesCardSummery
 
 const CoursesCategory = () => {
     const allCourses = useLoaderData()
-    console.log(allCourses);
     return (
         <Container>
             <Row>

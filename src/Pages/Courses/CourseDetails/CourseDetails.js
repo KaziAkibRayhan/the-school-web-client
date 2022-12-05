@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import { Image } from 'react-bootstrap';
+import { Col, Container, Image, Row } from 'react-bootstrap';
 import { FaFileDownload, FaStar } from 'react-icons/fa';
 import Pdf from "react-to-pdf";
 
@@ -10,42 +10,47 @@ import Pdf from "react-to-pdf";
 const CourseDetails = () => {
     const ref = React.createRef();
     const course = useLoaderData()
-    const {id, rating, img, details, course_name, course_fee, course_duration, } = course;
+    const { id, rating, img, details, course_name, course_fee, course_duration, } = course;
     return (
-        <div>
-            <div className='d-flex justify-content-center mt-2'>
-                <Pdf targetRef={ref} filename="course-details.pdf">
-                    {({ toPdf }) => <button className='btn btn-primary' onClick={toPdf}>Download Course details PDF <FaFileDownload className='text-light fs-3' /></button>}
-                </Pdf>
-            </div>
-            <Card ref={ref} className="w-50 mx-auto mt-2">
-                <Card.Header>
-                    <Card.Title className='fw-bold'>Course Name: <span className='text-primary'>{course_name}</span>.</Card.Title>
-                </Card.Header>
-                <Card.Body>
-                    <Image src={img} style={{ width: '100%' }}></Image>
-                    <Card.Text className='text-muted'>
-                        <h5 className='text-dark'>Course Description:</h5>
-                        {details}.
-                    </Card.Text>
-                    <Link to={`/courses/purchase/${id}`}>
-                        <Button variant="primary">Purchase The Course</Button>
-                    </Link>
-                </Card.Body>
-                <Card.Footer className="d-flex justify-content-between align-items-center">
-                    <div className='d-flex align-items-center'>
-                        <p className='text-warning'><FaStar /></p>
-                        <p className='ms-2'>{rating}</p>
+        <Container>
+            <Row>
+                <Col lg='8' md='6' sm='12'>
+
+                    <div className='d-flex justify-content-center mt-2'>
+                        <Pdf targetRef={ref} filename="course-details.pdf">
+                            {({ toPdf }) => <button className='btn btn-primary' onClick={toPdf}>Download Course details PDF <FaFileDownload className='text-light fs-3' /></button>}
+                        </Pdf>
                     </div>
-                    <div>
-                        <p className='fw-bold'>Course Fee: <span className='text-primary'>{course_fee} /- BDT.</span></p>
-                    </div>
-                    <div>
-                        <p className='fw-bold'>Course Duration: <span className='text-primary'>{course_duration}.</span></p>
-                    </div>
-                </Card.Footer>
-            </Card>
-        </div>
+                    <Card ref={ref} className="text-center mx-auto my-2">
+                        <Card.Header>
+                            <Card.Title className='fw-bold'>Course Name: <span className='text-primary'>{course_name}</span>.</Card.Title>
+                        </Card.Header>
+                        <Card.Body>
+                            <Image src={img} style={{ width: '50%' }}></Image>
+                            <Card.Text className='text-muted'>
+                                <span className='text-dark fw-bold fs-5 me-2'>Course Description:</span>
+                                {details}.
+                            </Card.Text>
+                            <Link to={`/courses/purchase/${id}`}>
+                                <Button variant="primary">Purchase The Course</Button>
+                            </Link>
+                        </Card.Body>
+                        <Card.Footer className="d-flex justify-content-between align-items-center">
+                            <div className='d-flex flex:md-col align-items-center'>
+                                <p className='text-warning'><FaStar /></p>
+                                <p className='ms-2'>{rating}</p>
+                            </div>
+                            <div>
+                                <p className='fw-bold'>Course Fee: <span className='text-primary'>{course_fee} /- BDT.</span></p>
+                            </div>
+                            <div>
+                                <p className='fw-bold'>Course Duration: <span className='text-primary'>{course_duration}.</span></p>
+                            </div>
+                        </Card.Footer>
+                    </Card>
+                </Col>
+            </Row>
+        </Container>
     );
 };
 

@@ -7,6 +7,7 @@ import { FaGithub, FaGoogle } from "react-icons/fa";
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
 import { GithubAuthProvider, GoogleAuthProvider } from 'firebase/auth';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Container } from 'react-bootstrap';
 
 const Login = () => {
     const { googleSignIn, githubSignIn, signIn } = useContext(AuthContext)
@@ -55,7 +56,7 @@ const Login = () => {
             .catch(error => console.error(error))
     }
     return (
-        <div className='w-50 mx-auto shadow-lg p-5 rounded mt-5'>
+        <Container className='w-70 mx-auto shadow-lg p-5 rounded mt-4'>
             <h3 className='text-center text-secondary'>Login Now</h3>
             <Form onSubmit={handleSubmitLogin}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
@@ -80,7 +81,7 @@ const Login = () => {
                 <Button onClick={handleGithubLogin} variant="info" className='me-3 rounded'><FaGithub /> Login With Github</Button>
             </ButtonGroup>
             <p className='mt-3'>Don't have an account? <Link className='btn btn-primary' to={'/register'}>Register <BiLogInCircle /></Link></p>
-        </div>
+        </Container>
     );
 };
 

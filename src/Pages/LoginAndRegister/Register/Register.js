@@ -39,7 +39,7 @@ const Register = () => {
     }
 
     return (
-        <div className='w-50 mx-auto shadow-lg p-4 rounded mt-3'>
+        <div className='w-75 mx-auto shadow-lg p-4 rounded mt-3'>
             <h3 className='text-center text-secondary'>Register Now</h3>
             <Form onSubmit={handleSubmitRegister}>
                 <Form.Group className="mb-3" controlId="formBasicFullName">
