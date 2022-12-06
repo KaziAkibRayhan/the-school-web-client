@@ -66,7 +66,6 @@ const Login = () => {
                 toast("Successfully Login !")
             })
             .catch(error => {
-                console.log(error);
                 setError(error.message)
                 toast("email or password error! Make sure email and password.")
             })
@@ -79,6 +78,7 @@ const Login = () => {
     const handlePasswordReset = () => {
         resetPassword(email)
             .then(() => {
+                setError('')
                 toast.success('Password reset email sent!')
             })
             .catch((error) => {
