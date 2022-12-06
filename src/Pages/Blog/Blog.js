@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
 import Accordion from 'react-bootstrap/Accordion';
+// import { MapContainer, TileLayer, } from "react-leaflet";
 
 const Blog = () => {
     return (
@@ -42,6 +43,22 @@ const Blog = () => {
                     </Accordion.Body>
                 </Accordion.Item>
             </Accordion>
+            
+            {/* Not work  */}
+            {/* <div className="containermx-auto mt-5 p-5">
+                <MapContainer
+                    scrollWheelZoom={false}
+                    className=""
+                    center={[51.0, 19.0]}
+                    zoom={4}
+                    maxZoom={18}
+                >
+                    <TileLayer
+                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                    />
+                </MapContainer>
+            </div> */}
         </Container>
     );
 };

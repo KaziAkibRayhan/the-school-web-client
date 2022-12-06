@@ -60,7 +60,7 @@ const Header = () => {
                         <>
                             <Button className='text-light fw-bold me-2' variant="outline-primary" onClick={toggleTheme}>{theme}</Button>
                         </>
-                        <>
+                        <Nav>
                             {
                                 user?.uid ? <>
                                     <Button onClick={handleLogOut} className='btn btn-warning my-2 text-light fw-bold'>Log Out <BiLogOut /></Button>
@@ -70,7 +70,7 @@ const Header = () => {
                                         <Button className='text-light fw-bold' variant="outline-warning">Login</Button>
                                     </Link>
                             }
-                        </>
+                        </Nav>
                     </Nav>
                 </Navbar.Collapse>
             </Container>
