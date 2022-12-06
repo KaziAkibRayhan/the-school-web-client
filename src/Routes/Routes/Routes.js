@@ -21,21 +21,21 @@ const routes = createBrowserRouter([
             {
                 path: '/',
                 element: <Courses />,
-                loader: () => fetch('http://localhost:5000/courses')
+                loader: () => fetch('https://the-school-web-server.vercel.app/courses')
             },
             {
                 path: '/courses/:id',
                 element: <CourseDetails></CourseDetails>,
-                loader: ({ params }) => fetch(`http://localhost:5000/courses/${params.id}`)
+                loader: ({ params }) => fetch(`https://the-school-web-server.vercel.app/courses/${params.id}`)
             },
             {
                 path: '/courses-category/:id',
                 element: <CoursesCategory></CoursesCategory>,
-                loader: ({ params }) => fetch(`http://localhost:5000/courses-category/${params.id}`)
+                loader: ({ params }) => fetch(`https://the-school-web-server.vercel.app/courses-category/${params.id}`)
             },
             {
                 path: '/courses/purchase/:id',
-                loader: ({ params }) => fetch(`http://localhost:5000/courses/purchase/${params.id}`),
+                loader: ({ params }) => fetch(`https://the-school-web-server.vercel.app/courses/purchase/${params.id}`),
                 element: <PrivateRoute><CoursePurchase /></PrivateRoute>
             },
             { path: '/faq', element: <FAQ /> },
