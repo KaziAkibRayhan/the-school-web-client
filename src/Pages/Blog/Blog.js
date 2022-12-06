@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container } from 'react-bootstrap';
 import Accordion from 'react-bootstrap/Accordion';
-// import { MapContainer, TileLayer, } from "react-leaflet";
+import { MapContainer, Marker, Popup, TileLayer, } from "react-leaflet";
 
 const Blog = () => {
     return (
@@ -43,22 +43,21 @@ const Blog = () => {
                     </Accordion.Body>
                 </Accordion.Item>
             </Accordion>
-            
-            {/* Not work  */}
-            {/* <div className="containermx-auto mt-5 p-5">
-                <MapContainer
-                    scrollWheelZoom={false}
-                    className=""
-                    center={[51.0, 19.0]}
-                    zoom={4}
-                    maxZoom={18}
-                >
+
+
+            <div className="container mx-auto mt-5 p-5">
+                <MapContainer style={{ width: '60vw', height: '60vh' }} center={[23.814417418340486, 90.41440049990749]} zoom={13} scrollWheelZoom={false}>
                     <TileLayer
+                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                     />
+                    <Marker position={[51.505, -0.09]}>
+                        <Popup>
+                            A pretty CSS3 popup. <br /> Easily customizable.
+                        </Popup>
+                    </Marker>
                 </MapContainer>
-            </div> */}
+            </div>
         </Container>
     );
 };
