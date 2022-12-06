@@ -11,8 +11,9 @@ import { Container } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 
 const Login = () => {
-    const { googleSignIn, githubSignIn, signIn } = useContext(AuthContext)
+    const { googleSignIn, githubSignIn, signIn, resetPassword } = useContext(AuthContext)
     const [error, setError] = useState('')
+    const [email, setEmail] = useState('')
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -70,13 +71,28 @@ const Login = () => {
                 toast("email or password error! Make sure email and password.")
             })
     }
+
+    const handleGetEmail = (event) => {
+        setEmail(event.target.value)
+    }
+
+    const handlePasswordReset = () => {
+        resetPassword(email)
+            .then(() => {
+                toast.success('Password reset email sent!')
+            })
+            .catch((error) => {
+                setError(error.message)
+            });
+    }
+
     return (
         <Container className='w-70 mx-auto shadow-lg p-5 rounded mt-4'>
             <h3 className='text-center text-secondary'>Login Now</h3>
             <Form onSubmit={handleSubmitLogin}>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
-                    <Form.Control type="email" name='email' placeholder="Enter email" required />
+                    <Form.Control onBlur={handleGetEmail} type="email" name='email' placeholder="Enter email" required />
                     <Form.Text className="text-muted">
                         We'll never share your email with anyone else.
                     </Form.Text>
@@ -86,9 +102,10 @@ const Login = () => {
                     <Form.Label>Password</Form.Label>
                     <Form.Control type="password" name='password' placeholder="Password" required />
                 </Form.Group>
-                <p className='text-danger fw-bold'>
-                    {error}
+                <p onClick={handlePasswordReset}>
+                    <Link>Forgot your password?</Link>
                 </p>
+                <p className='text-danger fw-bold fs-5'>{error}</p>
                 <Button variant="success" type="submit">
                     Login <BiLogInCircle />
                 </Button>

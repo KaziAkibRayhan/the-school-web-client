@@ -14,7 +14,7 @@ const CourseDetails = () => {
     return (
         <Container>
             <Row>
-                <Col md='6' sm='12'>
+                <Col md='9' sm='12'>
 
                     <div className='d-flex justify-content-center mt-2'>
                         <Pdf targetRef={ref} filename="course-details.pdf">

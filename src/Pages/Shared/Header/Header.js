@@ -4,9 +4,10 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { BiLogOut } from 'react-icons/bi';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import Logo from '../../../assets/web logo/logo.png';
 import { AuthContext } from '../../../contexts/AuthProvider/AuthProvider';
+import './Header.css'
 
 const Header = () => {
     const { user, logOut } = useContext(AuthContext)
@@ -31,7 +32,7 @@ const Header = () => {
         <Navbar collapseOnSelect expand="lg" bg="secondary" variant="dark">
             <Container>
                 <>
-                    <Link className='navbar-brand' to={'/'}>
+                    <NavLink className='navbar-brand' to={'/'}>
                         <img
                             alt="The School Web Logo"
                             src={Logo}
@@ -40,14 +41,20 @@ const Header = () => {
                             className="d-inline-block align-top me-2"
                         />
                         <span>The School Web</span>
-                    </Link>
+                    </NavLink>
                 </>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
-                        <><Link className="nav-link" to={'/'}>Courses</Link></>
-                        <> <Link className="nav-link" to={'/faq'}>FAQ</Link></>
-                        <> <Link className="nav-link" to={'/blog'}>Blog</Link></>
+                        <><NavLink
+                            style={({ isActive }) => { return { color: isActive ? '#11c3fd' : '' } }}
+                            className="nav-link" to={'/'}>Courses</NavLink></>
+                        <> <NavLink
+                            style={({ isActive }) => { return { color: isActive ? '#11c3fd' : '' } }}
+                            className="nav-link" to={'/faq'}>FAQ</NavLink></>
+                        <> <NavLink
+                            style={({ isActive }) => { return { color: isActive ? '#11c3fd' : '' } }}
+                            className="nav-link" to={'/blog'}>Blog</NavLink></>
                     </Nav>
                     <Nav>
                         <>
